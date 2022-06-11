@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework16.2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="main-container">
+        <h2 class="main__title">Оценка стоимости автомобиля не выходя из дома</h2>
+        <p class="text">Узнайте рыночную стоимость автомобиля онлайн</p>
+        <form action="#" method="post" class="form form__car-calc">
+            <div class="form__car-brend">
+                <p class="text">Марка машины</p>
+                <select name="car-brend" id="car-brend">
+                    <option value="brend">Марка</option>
+                    <option value="Audi">Audi</option>
+                    <option value="Chevrolet">Chevrolet</option>
+                    <option value="Fiat">Fiat</option>
+                    <option value="Mazda">Mazda</option>
+                </select>
+            </div>
+            <div class="form__car-model">
+                <div class="car-model__audi">
+                    <select name="car-model" id="car-audi">
+                        <option value="model">Модель</option>
+                        <option value="300">A3</option>
+                        <option value="400">A4</option>
+                        <option value="500">Q3 Sportback</option>
+                        <option value="600">TT RS</option>
+                    </select>
+                </div>
+                <div class="car-model__chevrolet">
+                    <select name="car-model" id="car-chevrolet">
+                        <option value="700">Модель</option>
+                        <option value="800">Camaro</option>
+                        <option value="900">Corvette</option>
+                        <option value="1000">Impala</option>
+                        <option value="1100">Volt</option>
+                    </select>
+                </div>
+                <div class="car-model__fiat">
+                    <select name="car-model" id="car-fiat">
+                        <option value="model">Модель</option>
+                        <option value="300">500</option>
+                        <option value="400">Panda</option>
+                        <option value="500">Tipo</option>
+                        <option value="600">Doblo</option>
+                    </select>
+                </div>
+                <div class="car-model__mazda">
+                    <select name="car-model" id="car-mazda">
+                        <option value="model">Модель</option>
+                        <option value="700">3</option>
+                        <option value="800">Axela</option>
+                        <option value="900">CX-3</option>
+                        <option value="1000">RX-8</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form__fuel-type">
+                <p class="text">Тип топлива</p>
+                <div class="fuel-type__container">
+                    <div class="fuel-type_petrol"><input type="radio" name="fuel-type" id="petrol" value="50"> бензин (включая
+                        гибрид)</div>
+                    <div class="fuel-type_diesel"><input type="radio" name="fuel-type" id="diesel" value="60"> дизельное
+                        топливо
+                    </div>
+                    <div class="fuel-type_electric"><input type="radio" name="fuel-type" id="electric" value="70">
+                        электрический</div>
+                </div>
+            </div>
+            <div class="form__drive-type">
+                <p class="text">Тип привода</p>
+                <div class="drive-type__container">
+                    <div class="drive-type_front"><input type="radio" name="drive-type" id="front-wheel" value="55">
+                        переднеприводной</div>
+                    <div class="drive-type_rear"><input type="radio" name="drive-type" id="rear-wheel" value="65">
+                        заднеприводной</div>
+                    <div class="drive-type_all"><input type="radio" name="drive-type" id="all-wheel" value="75"> полноприводной
+                    </div>
+                </div>
+            </div>
+            <div class="form__mileage">
+                <p class="text">
+                    <label for="mileage">Пробег</label>
+                </p>
+                <input type="number" id="mileage" required>
+            </div>
+            <div class="form__car-equipment">
+                <p class="text">Комплектация автомобиля</p>
+                <label for="camera-front">
+                    <input type="checkbox" name="car-equipment" id="camera-front" value="11">Камера переднего вида
+                </label>
+                <label for="camere-rear">
+                    <input type="checkbox" name="car-equipment" id="camere-rear" value="12">Камера заднего вида
+                </label>
+                <label for="headrest-monitor">
+                    <input type="checkbox" name="car-equipment" id="headrest-monitor" value="13">Мониторы на подголовники
+                </label>
+                <label for="all-round-view">
+                    <input type="checkbox" name="car-equipment" id="all-round-view" value="14">Система
+                    кругового обзора
+                </label>
+                <label for="parking-sensors">
+                    <input type="checkbox" name="car-equipment" id="parking-sensors" value="15">Система парковки Парктроник
+                </label>
+                <label for="subwoofer">
+                    <input type="checkbox" name="car-equipment" id="subwoofer" value="16">Усилители звука, сабвуферы
+                </label>
+            </div>
+            <div class="form__calc-btn">
+                <input type="button" value="Расчитать стоимость" id="calc-btn">
+                <input type="reset" value="Очистить">
+            </div>
+        </form>
+        <div id="total-price"></div>
+
+    </main>
+    <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    color: #444;
+}
+
+.form__car-brend,
+.form__car-model {
+    margin-bottom: 1rem;
+}
+
+.form__car-brend select,
+.form__car-model select,
+.form__mileage input,
+.form__calc-btn input {
+    width: 200px;
+    padding: .75rem .85rem;
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #444;
+}
+
+#car-audi,
+#car-chevrolet,
+#car-fiat,
+#car-mazda {
+    display: none;
+}
+/* Убрирает стрелочки в <input type="number"> */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.form__car-equipment {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+#total-price {
+    padding: 15px;
+    color:rgb(71, 71, 233);
+}
