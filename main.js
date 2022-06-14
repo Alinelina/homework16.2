@@ -4,17 +4,21 @@ const carAudiSelect = document.getElementById('car-audi');
 const carChevroletSelect = document.getElementById('car-chevrolet');
 const carFiatSelect = document.getElementById('car-fiat');
 const carMazdaSelect = document.getElementById('car-mazda');
-let totalPriceResult = document.querySelector('#total-price');
-const calcBtn = document.querySelector('#calc-btn');
 
-
-const inputs = document.querySelectorAll('input');
 const inputsFuelType = document.querySelectorAll('input[name="fuel-type"]');
 const inputsDriveType = document.querySelectorAll('input[name="drive-type"]');
-const inputsCarEquipment = document.querySelectorAll('input[name="car-equipment"]');  
+const mileAge = document.querySelector('#mileage');
+const inputsCarEquipment = document.querySelectorAll('input[name="car-equipment"]');
+
+
+let totalPriceResult = document.querySelector('#total-price');
+let resetBtn = document.querySelector('#calc-btn-reset');
+let calcBtn = document.querySelector('#calc-btn');
+
 let basicPrice;
-let totalPriceArr = [];
+let totalPriceArray = [];
 let value;
+let totalPrice;
 
 
 //В зависимость от выбора марки машины появляется выбор марки машины
@@ -50,69 +54,79 @@ carBrend.addEventListener('change', function () {
 
 // В зависимости от выбора марки меняет базовую цену
 carAudiSelect.addEventListener('change', function () {
-    //basicPrice = +this.value;
     value = +this.value;
     console.log(value);
-    array.push(value);
+    totalPriceArray.push(value);
 })
 
 carChevroletSelect.addEventListener('change', function () {
-    //basicPrice = +this.value;
     value = +this.value;
     console.log(value);
-    array.push(value);
+    totalPriceArray.push(value);
 })
 
 carFiatSelect.addEventListener('change', function () {
-    //basicPrice = +this.value;
     value = +this.value;
     console.log(value);
-    array.push(value);
+    totalPriceArray.push(value);
 })
 
 carMazdaSelect.addEventListener('change', function () {
-    //basicPrice = +this.value;
     value = +this.value;
     console.log(value);
-    array.push(value);
+    totalPriceArray.push(value);
 })
 
 
 
 // В зависимости от чекбокса или радиокнопки меняет цену
-// for (const input of inputsCarEquipment) {
-//     input.addEventListener('input', function () {
-//         //totalPrice = basicPrice + +this.value;
-//         value = +this.value;
-//         console.log(value);
-//         array.push(value);
-//     })
-// }
-// inputsCarEquipment.addEventListener('input', function () {
-//     totalPrice = basicPrice + +this.value;
-//     value = +this.value;
-//     console.log(value);
-//     array.push(value);
-// })
+for (const input of inputsCarEquipment) {
+    input.addEventListener('input', function () {
+        value = +this.value;
+        console.log(value);
+        totalPriceArray.push(value);
+    })
+}
 
-// for (const input of inputsFuelType) {
-//     input.addEventListener('input', function () {
-//         value = +this.value;
-//         totalPrice = basicPrice + +this.value;
-//         console.log(value);
-//         array.push(value);
-//     })
-// }
+for (const input of inputsFuelType) {
+    input.addEventListener('input', function () {
+        value = +this.value;
+        totalPrice = basicPrice + +this.value;
+        console.log(value);
+        totalPriceArray.push(value);
+    })
+}
 
-// for (const input of inputsDriveType) {
-//     input.addEventListener('input', function () {
-//         totalPrice = basicPrice + +this.value;
-//         value = +this.value;
-//         console.log(value);
-//         array.push(value);
-//     })
-// }
+for (const input of inputsDriveType) {
+    input.addEventListener('input', function () {
+        totalPrice = basicPrice + +this.value;
+        value = +this.value;
+        console.log(value);
+        totalPriceArray.push(value);
+    })
+}
 
-// calcBtn.addEventListener('click', function () {
-//     console.log(array);
-// });
+// Привязка к кнопке id="calc-btn"
+calcBtn.addEventListener('click', function () {
+    console.log(totalPriceArray);
+    totalPrice = totalPriceArray.reduce((x, y) => x + y);
+
+    // В зависимости от пробега меняется результирующая цена
+    if (mileAge.value > 2500) {
+        totalPrice *= 0;
+        console.log(totalPrice);
+    } else if (mileAge.value > 1000) {
+        totalPrice *= 0.8;
+    } else if (mileAge.value <= 1000) {
+        totalPrice *= 1;
+    }
+
+    totalPriceResult.style.borderWidth = '1px';
+    totalPriceResult.style.borderStyle = 'solid';
+    totalPriceResult.innerHTML = `Стоимость автомобиля: ${totalPrice}`;
+});
+
+resetBtn.addEventListener('click', () => {
+    totalPriceResult.style.borderWidth = '0';
+    totalPriceResult.innerHTML = '';
+})
