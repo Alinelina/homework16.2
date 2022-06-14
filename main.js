@@ -130,3 +130,5 @@ resetBtn.addEventListener('click', () => {
     totalPriceResult.style.borderWidth = '0';
     totalPriceResult.innerHTML = '';
 })
+
+// Подскажите, пожалуйста, как сделать, чтобы при изменении чекбоксов, прошлые удалялись из массива totalPriceArray и не влияли на totalPrice
