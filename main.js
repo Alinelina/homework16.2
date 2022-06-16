@@ -14,20 +14,17 @@ let totalPriceResult = document.querySelector('#total-price');
 let resetBtn = document.querySelector('#calc-btn-reset');
 let calcBtn = document.querySelector('#calc-btn');
 
-let basicPrice;
-let totalPriceArray = [];
-let value;
+let basicPrice = 0;
 let totalPrice;
 
 
-//В зависимость от выбора марки машины появляется выбор марки машины
+//В зависимость от выбора бренда машины появляется выбор марки машины
 
 function displayModelList(brand) {
     modelSelects.forEach((select) => {
         if (select.id === brand) {
             select.style.display = 'block';
-        }
-        else {
+        } else {
             select.style.display = 'none';
         }
     })
@@ -37,83 +34,73 @@ carBrend.addEventListener('change', function () {
     displayModelList(this.value)
 })
 
-// В зависимости от выбора марки меняет базовую цену
-carAudiSelect.addEventListener('change', function () {
-    value = +this.value;
-    console.log(value);
-    totalPriceArray.push(value);
-})
+//Расчет стоимости
+function calculate() {
 
-carChevroletSelect.addEventListener('change', function () {
-    value = +this.value;
-    console.log(value);
-    totalPriceArray.push(value);
-})
+    //Переменные
+    let fuelTypeValue = 0;
+    let driveTypeValue = 0;
+    let mileAgeValue = 0;
+    let carEquipmentValue = 0;
 
-carFiatSelect.addEventListener('change', function () {
-    value = +this.value;
-    console.log(value);
-    totalPriceArray.push(value);
-})
+//Определяет базовую цену в зависимости от марки машины
+    for (const select of modelSelects) {
 
-carMazdaSelect.addEventListener('change', function () {
-    value = +this.value;
-    console.log(value);
-    totalPriceArray.push(value);
-})
+        if (select.value == '0') {
+            continue;
+        }
 
-
-
-// В зависимости от чекбокса или радиокнопки меняет цену
-for (const input of inputsCarEquipment) {
-    input.addEventListener('input', function () {
-        value = +this.value;
-        console.log(value);
-        totalPriceArray.push(value);
-    })
-}
-
-for (const input of inputsFuelType) {
-    input.addEventListener('input', function () {
-        value = +this.value;
-        totalPrice = basicPrice + +this.value;
-        console.log(value);
-        totalPriceArray.push(value);
-    })
-}
-
-for (const input of inputsDriveType) {
-    input.addEventListener('input', function () {
-        totalPrice = basicPrice + +this.value;
-        value = +this.value;
-        console.log(value);
-        totalPriceArray.push(value);
-    })
-}
-
-// Привязка к кнопке id="calc-btn"
-calcBtn.addEventListener('click', function () {
-    console.log(totalPriceArray);
-    totalPrice = totalPriceArray.reduce((x, y) => x + y);
-
-    // В зависимости от пробега меняется результирующая цена
-    if (mileAge.value > 2500) {
-        totalPrice *= 0;
-        console.log(totalPrice);
-    } else if (mileAge.value > 1000) {
-        totalPrice *= 0.8;
-    } else if (mileAge.value <= 1000) {
-        totalPrice *= 1;
+        basicPrice = select.value;
     }
 
+//надбавка по типу топлива
+    for (const input of inputsFuelType) {
+        if (input.checked) {
+            fuelTypeValue = input.value;
+        }
+    }
+
+//надбавка по типу привода 
+    for (const input of inputsDriveType) {
+        if (input.checked) {
+            driveTypeValue = input.value;
+        }
+    }
+
+//надбавка по километражу    
+    if (mileAge.value > 2500) {
+        mileAgeValue = -300;
+    } else if (mileAge.value > 1000) {
+        mileAgeValue = -200;
+    } else if (mileAge.value <= 1000) {
+        mileAgeValue = 0;
+    }
+
+//надбавка по комплектации    
+    for (const input of inputsCarEquipment) {
+        if (input.checked == false) {
+            continue;
+        }
+
+        carEquipmentValue += +input.value;
+    }
+
+//Расчет общей цены
+    totalPrice = +basicPrice + +fuelTypeValue + +mileAgeValue + +driveTypeValue + +carEquipmentValue;
+    
+    return totalPrice;
+}
+
+//Вывод на экран
+calcBtn.addEventListener('click', function () {
+    let result = calculate();
     totalPriceResult.style.borderWidth = '1px';
     totalPriceResult.style.borderStyle = 'solid';
-    totalPriceResult.innerHTML = `Стоимость автомобиля: ${totalPrice}`;
+    totalPriceResult.innerHTML = `Стоимость автомобиля: ${result}`;
 });
 
+//Очистка поля вывода
 resetBtn.addEventListener('click', () => {
     totalPriceResult.style.borderWidth = '0';
     totalPriceResult.innerHTML = '';
 })
-
-// Подскажите, пожалуйста, как сделать, чтобы при изменении чекбоксов, прошлые удалялись из массива totalPriceArray и не влияли на totalPrice
