@@ -23,10 +23,10 @@
     color: #444;
 }
 
-#car-audi,
-#car-chevrolet,
-#car-fiat,
-#car-mazda {
+#Audi,
+#Chevrolet,
+#Fiat,
+#Mazda {
     display: none;
 }
 /* Убрирает стрелочки в <input type="number"> */

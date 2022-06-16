@@ -1,15 +1,14 @@
-let carBrend = document.querySelector('#car-brend');
-
-const carAudiSelect = document.getElementById('car-audi');
-const carChevroletSelect = document.getElementById('car-chevrolet');
-const carFiatSelect = document.getElementById('car-fiat');
-const carMazdaSelect = document.getElementById('car-mazda');
+const carBrend = document.querySelector('#car-brend');
+const carAudiSelect = document.getElementById('Audi');
+const carChevroletSelect = document.getElementById('Chevrolet');
+const carFiatSelect = document.getElementById('Fiat');
+const carMazdaSelect = document.getElementById('Mazda');
+const modelSelects = [carAudiSelect, carChevroletSelect, carFiatSelect, carMazdaSelect];
 
 const inputsFuelType = document.querySelectorAll('input[name="fuel-type"]');
 const inputsDriveType = document.querySelectorAll('input[name="drive-type"]');
 const mileAge = document.querySelector('#mileage');
 const inputsCarEquipment = document.querySelectorAll('input[name="car-equipment"]');
-
 
 let totalPriceResult = document.querySelector('#total-price');
 let resetBtn = document.querySelector('#calc-btn-reset');
@@ -22,35 +21,21 @@ let totalPrice;
 
 
 //В зависимость от выбора марки машины появляется выбор марки машины
-// Подскажите, пожалуйста, как сделать короче?
+
+function displayModelList(brand) {
+    modelSelects.forEach((select) => {
+        if (select.id === brand) {
+            select.style.display = 'block';
+        }
+        else {
+            select.style.display = 'none';
+        }
+    })
+}
+
 carBrend.addEventListener('change', function () {
-    if (this.value === 'Audi') {
-        carAudiSelect.style.display = 'block';
-        carChevroletSelect.style.display = 'none';
-        carFiatSelect.style.display = 'none';
-        carMazdaSelect.style.display = 'none';
-    } else if (this.value === 'Chevrolet') {
-        carChevroletSelect.style.display = 'block';
-        carAudiSelect.style.display = 'none';
-        carFiatSelect.style.display = 'none';
-        carMazdaSelect.style.display = 'none';
-    } else if (this.value === 'Fiat') {
-        carFiatSelect.style.display = 'block';
-        carChevroletSelect.style.display = 'none';
-        carAudiSelect.style.display = 'none';
-        carMazdaSelect.style.display = 'none';
-    } else if (this.value === 'Mazda') {
-        carMazdaSelect.style.display = 'block';
-        carChevroletSelect.style.display = 'none';
-        carFiatSelect.style.display = 'none';
-        carAudiSelect.style.display = 'none';
-    } else {
-        carFiatSelect.style.display = 'none';
-        carChevroletSelect.style.display = 'none';
-        carAudiSelect.style.display = 'none';
-        carMazdaSelect.style.display = 'none';
-    }
-});
+    displayModelList(this.value)
+})
 
 // В зависимости от выбора марки меняет базовую цену
 carAudiSelect.addEventListener('change', function () {
